@@ -42,7 +42,7 @@ class ApiError {
     errors = []
 
     constructor(data) {
-        console.log(data);
+        // console.log(data);
         if (_.isArray(data)) {
             this.errors = data
         } else if (_.isString(data)) {

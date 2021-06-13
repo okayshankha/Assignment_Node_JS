@@ -4,7 +4,7 @@ const schema = Joi.object({
     firstName: Joi.string().required(),
     middleName: Joi.string().allow(''),
     lastName: Joi.string(),
-    email: Joi.string().email({ minDomainSegments: 2 }),
+    email: Joi.string().email({ minDomainSegments: 2 }).required(),
     password: Joi.string().min(3).required(),
 })
 
