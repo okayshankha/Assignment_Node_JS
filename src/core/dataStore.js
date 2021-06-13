@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
-const { MONGODB_CONNECTION_STRING } = require('./../../config')
+const { MONGODB_CONNECTION_STRING, MONGO_AUTH_SOURCE } = require('./../../config')
 
 mongoose.connect(MONGODB_CONNECTION_STRING, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
 });
 
 mongoose.connection.on("error", () => {

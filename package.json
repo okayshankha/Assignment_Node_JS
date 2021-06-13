@@ -5,6 +5,7 @@
   "main": "bin/www",
   "scripts": {
     "start": "node bin/www",
+    "dev": "nodemon bin/www",
     "copy-env": "cp .env.sample .env",
     "test": "mocha --no-deprecation test/lifecycle.test.js test/**/**/*.js"
   },
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "mocha": "^9.0.0",
+    "nodemon": "^2.0.7",
     "supertest": "^6.1.3"
   }
 }
