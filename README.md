@@ -94,12 +94,16 @@ Headers
 
 # Scan / Fetch Stock Data
 POST http://localhost:3000/api/stock/scan
+Headers
+    authorization: Bearer <token>
 Query-Param: (example)
     symbol: String
 
 
 # Fetch Stock Search History (We can filer the data by symbol query-param)
 POST http://localhost:3000/api/stock/scan/history
+Headers
+    authorization: Bearer <token>
 Query-Param: (example)
     symbol: String
 
