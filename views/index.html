@@ -1,0 +1,592 @@
+<div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+        integrity="undefined" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css"
+        integrity="sha512-YdYyWQf8AS4WSB0WWdc3FbQ3Ypdm0QCWD2k4hgfqbQbRCJBEgX0iAegkl2S1Evma5ImaVXLBeUkIlP6hQ1eYKQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notiflix@3.0.1/dist/notiflix-3.0.1.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            background: #f5f5f5;
+        }
+
+        .rounded-lg {
+            border-radius: 1rem;
+        }
+
+        .nav-pills .nav-link {
+            color: #555;
+        }
+
+        .nav-pills .nav-link.active {
+            color: #fff;
+        }
+
+        .template {
+            display: none;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+        }
+
+        .historyButton {
+            cursor: pointer;
+            padding: 10px;
+            background-color: #0275d8;
+            margin-bottom: 5px;
+            color: white;
+        }
+    </style>
+
+
+    <!-- <input data-toggle="datepicker">  -->
+
+
+    <div class="container py-5">
+
+        <div id="target">Loading...</div>
+        <div id="target-main"></div>
+
+    </div>
+
+
+
+    <dic id="template-header" class="template">
+        <div class="row" id="after-login-div">
+            <div class="col-lg-7 mx-auto">
+                <div class="bg-white shadow-sm p-5">
+                    <div class="row">
+                        <div class="col-2">
+                            <img src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&name={{name}}" alt=""
+                                class="rounded-circle">
+                        </div>
+                        <div class="col-8 p-2 display-6">
+                            {{name}}
+                        </div>
+                        <div class="col-2 p-2 display-6">
+                            <i class="bi bi-box-arrow-in-right cursor-pointer" onclick="_logout()"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dic>
+
+
+
+    <div id="template-login" class="template">
+
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+                <div class="bg-white shadow-sm p-5">
+                    <!-- Credit card form tabs -->
+                    <ul role="tablist" class="nav bg-light nav-pills rounded-pill nav-fill mb-3">
+                        <li class="nav-item">
+                            <a data-toggle="pill" href="#nav-tab-signin" class="nav-link active rounded-pill">
+                                <i class="fa fa-credit-card"></i>
+                                Sign In
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a data-toggle="pill" href="#nav-tab-signup" class="nav-link rounded-pill">
+                                <i class="fa fa-paypal"></i>
+                                Sign Up
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- End -->
+
+
+                    <!-- Credit card form content -->
+                    <div class="tab-content">
+
+                        <!-- credit card info-->
+                        <div id="nav-tab-signin" class="tab-pane fade show active">
+                            <form role="form" id="signInForm" method="POST">
+                                <div class="form-group">
+                                    <label for="StockSymbol">Enter Your Email</label>
+                                    <input type="email" name="email" placeholder="Enter Your Email" required
+                                        class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="StockSymbol">Your Password Here</label>
+                                    <input type="password" name="password" placeholder="Your Password Here" required
+                                        class="form-control">
+                                </div>
+                                <br>
+
+                                <button type="submit" id="signInButton"
+                                    class="subscribe btn btn-primary btn-block rounded-pill shadow-sm">
+                                    Sign In
+                                </button>
+                            </form>
+                        </div>
+                        <!-- End -->
+
+                        <!-- Paypal info -->
+                        <div id="nav-tab-signup" class="tab-pane fade">
+                            <form role="form" id="signUpForm" method="POST">
+                                <div class="form-group">
+                                    <label for="StockSymbol">First Name</label>
+                                    <input type="firstName" name="firstName" placeholder="Enter Your First Name"
+                                        required class="form-control">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="StockSymbol">Middle Name</label>
+                                    <input type="middleName" name="middleName" placeholder="Enter Your Middle Name"
+                                        class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="StockSymbol">Last Name</label>
+                                    <input type="lastName" name="lastName" placeholder="Enter Your Last Name"
+                                        class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="StockSymbol">Email</label>
+                                    <input type="email" name="email" placeholder="Enter Your Email" required
+                                        class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="StockSymbol">Password</label>
+                                    <input type="password" name="password" placeholder="Your Password Here" required
+                                        class="form-control">
+                                </div>
+                                <br>
+
+                                <button type="submit" id="signUpButton"
+                                    class="subscribe btn btn-primary btn-block rounded-pill shadow-sm">
+                                    Sign Up
+                                </button>
+                            </form>
+                        </div>
+                        <!-- End -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="template-main" class="template">
+
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+                <div class="bg-white shadow-sm p-5">
+                    <!-- Credit card form tabs -->
+                    <ul role="tablist" class="nav bg-light nav-pills rounded-pill nav-fill mb-3">
+                        <li class="nav-item">
+                            <a data-toggle="pill" href="#nav-tab-scan" id="id-nav-tab-scan"
+                                class="nav-link active rounded-pill">
+                                <i class="fa fa-credit-card"></i>
+                                Scan Stock
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a data-toggle="pill" href="#nav-tab-history" class="nav-link rounded-pill"
+                                onclick="onClickHistory();">
+                                <i class="fa fa-paypal"></i>
+                                History
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- End -->
+
+
+                    <!-- Credit card form content -->
+                    <div class="tab-content">
+
+                        <!-- credit card info-->
+                        <div id="nav-tab-scan" class="tab-pane fade show active">
+                            <form role="form" id="stockScanForm" method="POST" submit=false>
+                                <div class="form-group">
+                                    <label for="StockSymbol">Search Stock Symbol</label>
+                                    <input id="scanStockInputBox" type="text" name="symbol"
+                                        placeholder="Stock Symbol Here" required class="form-control">
+                                </div>
+                                <br>
+
+                                <button class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"
+                                    id="idNavTabScanButton">
+                                    Confirm
+                                </button>
+                            </form>
+                            <canvas id="stockScanChart"></canvas>
+                        </div>
+                        <!-- End -->
+
+                        <!-- Paypal info -->
+                        <div id="nav-tab-history" class="tab-pane fade">
+                            <div id="target-main-history"></div>
+                        </div>
+                        <!-- End -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="template" id="template-main-history">
+
+        {{#scanHistory}}
+        <div class="historyButton" onclick="onClickHistoryButton('{{stock.symbol}}')">{{stock.name}}</div>
+        {{/scanHistory}}
+        <p>
+    </div>
+
+
+
+    <script src="https://unpkg.com/mustache@latest"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js"
+        integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/notiflix@3.0.1/dist/notiflix-aio-3.0.1.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+        integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        var baseUrl = "http://localhost:3000"
+    </script>
+
+
+    <script>
+        function _getFormValues(formData, fields = [], callback) {
+            const data = formData
+            const outputValues = {}
+            for (let index = 0; index < fields.length; index++) {
+                const element = fields[index];
+                outputValues[element] = data.get(element);
+            }
+            return outputValues
+        }
+
+        async function api(url, payload, type = 'get', bearerTrue = true) {
+            try {
+
+                Notiflix.Loading.circle();
+
+                url = baseUrl + '/' + url
+
+                const headers = {
+                    'Content-Type': 'application/json',
+                }
+
+                if (bearerTrue) {
+                    headers.authorization = _getToken()
+                }
+
+
+                let result = null
+
+                if (type === 'post') {
+                    result = await axios.post(url, payload, { headers }).catch(error => error.response)
+                }
+                if (type === 'get') {
+                    result = await axios.get(url, { headers }).catch(error => error.response)
+                }
+
+                Notiflix.Loading.remove()
+
+                return result
+
+            } catch (error) {
+                console.log(error);
+                Notiflix.Notify.failure('Something went wrong.');
+            }
+        }
+
+        function _logout() {
+            sessionStorage.removeItem('bearerToken')
+            Notiflix.Notify.success("Signed out successfully");
+            render.header()
+        }
+
+        function _getToken() {
+            return sessionStorage.getItem('bearerToken')
+        }
+
+        function _isLoggedIn() {
+            const token = _getToken()
+            document.getElementById('target-main').innerHTML = '';
+            return token ? true : false
+        }
+
+
+        function onClickHistory() {
+            render.stockScanHistory();
+        }
+
+        function onClickHistoryButton(symbol) {
+            const scanStockInputBox = $("#scanStockInputBox")
+            scanStockInputBox.val(symbol)
+
+
+            const idNavTabScan = $("#id-nav-tab-scan")
+            idNavTabScan.click()
+
+            const idNavTabScanButton = $("#idNavTabScanButton")
+            idNavTabScanButton.click()
+
+        }
+
+
+        let chart = null
+
+        const render = {
+            header: async function () {
+                if (_isLoggedIn()) {
+
+                    let me = null
+
+                    try {
+                        const result = await api('api/user/me', null, 'get')
+
+                        const { data } = result
+
+                        if (result.status === 200) {
+                            const { data: { message, items } } = data
+                            me = items[0]
+                        } else {
+                            const { data: { message } } = data
+                            Notiflix.Notify.failure(message);
+                        }
+                    } catch (error) {
+                        console.log(error);
+                        Notiflix.Notify.failure('Something went wrong.');
+                    }
+
+                    var template = document.getElementById('template-header').innerHTML;
+                    var rendered = Mustache.render(template, { name: me?.firstName });
+                    document.getElementById('target').innerHTML = rendered;
+
+                    this.stockScan()
+                } else {
+                    this.login()
+                }
+
+            },
+
+            login: function () {
+                var template = document.getElementById('template-login').innerHTML;
+                var rendered = Mustache.render(template);
+                document.getElementById('target').innerHTML = rendered;
+
+
+                // Process sign in form
+                const signInForm = document.getElementById('signInForm');
+                signInForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+
+                    const jsonFormData = _getFormValues(new FormData(event.target), ['email', 'password'])
+
+                    try {
+                        const result = await api('api/auth/login', jsonFormData, 'post')
+
+                        const { data } = result
+
+                        if (result.status === 200) {
+                            const { data: { token, message } } = data
+                            sessionStorage.setItem('bearerToken', `Bearer ${token}`)
+                            Notiflix.Notify.success(message);
+                            render.header()
+                        } else {
+                            const { data: { message, error } } = data
+                            Notiflix.Notify.failure(message + ' ' + error.toString());
+                        }
+                    } catch (error) {
+                        Notiflix.Notify.failure('Something went wrong.');
+                    }
+                });
+
+                // Process sign up form
+                const signUpForm = document.getElementById('signUpForm');
+                signUpForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+
+                    const jsonFormData = _getFormValues(new FormData(event.target), ['firstName', 'middleName', 'lastName', 'email', 'password'])
+
+                    try {
+                        const result = await api('api/auth/register', jsonFormData, 'post')
+
+                        const { data } = result
+
+                        if (result.status === 201) {
+                            const { data: { message } } = data
+                            Notiflix.Notify.success(message);
+                            Notiflix.Notify.success("Please login to get into the system.");
+                            this.login()
+                        } else {
+                            const { data: { message, error } } = data
+                            Notiflix.Notify.failure(message + ' ' + error.toString());
+                        }
+                    } catch (error) {
+                        Notiflix.Notify.failure('Something went wrong.');
+                    }
+                });
+            },
+
+            stockScan: function () {
+                var template = document.getElementById('template-main').innerHTML;
+                var rendered = Mustache.render(template);
+                document.getElementById('target-main').innerHTML = rendered;
+
+                const stockScanForm = document.getElementById('stockScanForm');
+                stockScanForm.addEventListener('submit', async (event) => {
+
+                    event.preventDefault();
+
+                    try {
+                        let stockData = null
+
+
+                        const jsonFormData = _getFormValues(new FormData(event.target), ['symbol'])
+
+                        const { symbol } = jsonFormData
+
+                        const result = await api(`api/stocks/scan?symbol=${symbol}`, null, 'get')
+
+                        const { data } = result
+
+                        if (result.status === 200) {
+                            const { data: { message, items } } = data
+                            stockData = items
+
+                            let labels = null
+                            if (stockData && stockData.length) {
+                                labels = stockData.map(e => {
+                                    return moment(e.timestamp).format('DD/MMM hh:mm');
+                                })
+                            }
+
+
+                            const canvas = document.getElementById('stockScanChart')
+                            let ctx = canvas.getContext('2d');
+                            if (chart) {
+                                chart.destroy()
+                            }
+                            chart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels,
+                                    datasets: [
+                                        {
+                                            label: 'Volume',
+                                            data: stockData.map(e => e.volume),
+                                            borderColor: 'rgba(255, 99, 132, 0.2)',
+                                            backgroundColor: 'rgba(255, 99, 132, 1)',
+                                        },
+                                        {
+                                            label: 'Open',
+                                            data: stockData.map(e => e.open),
+                                            borderColor: 'rgba(255, 159, 64, 0.2)',
+                                            backgroundColor: 'rgb(255, 159, 64)',
+                                        },
+                                        {
+                                            label: 'High',
+                                            data: stockData.map(e => e.high),
+                                            borderColor: 'rgb(255, 205, 86, 0.2)',
+                                            backgroundColor: 'rgb(255, 205, 86)',
+                                        },
+                                        {
+                                            label: 'Low',
+                                            data: stockData.map(e => e.low),
+                                            borderColor: 'rgb(75, 192, 192, 0.2)',
+                                            backgroundColor: 'rgb(75, 192, 192)',
+                                        },
+                                        {
+                                            label: 'Close',
+                                            data: stockData.map(e => e.close),
+                                            borderColor: 'rgb(54, 162, 235, 0.2)',
+                                            backgroundColor: 'rgb(54, 162, 235)',
+                                        },
+                                    ]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+
+                        } else {
+                            const { data: { message, error } } = data
+                            Notiflix.Notify.failure(message + ' ' + error.toString());
+                        }
+
+
+                    } catch (error) {
+                        console.log(error);
+                        Notiflix.Notify.failure('Something went wrong.');
+                    }
+
+                })
+            },
+
+
+            stockScanHistory: async () => {
+                let scanHistory = []
+                try {
+                    const result = await api('api/stocks/scan/history', null, 'get')
+
+                    const { data } = result
+
+                    if (result.status === 200) {
+                        const { data: { message, items } } = data
+                        scanHistory = items
+                    } else {
+                        const { data: { message } } = data
+                        Notiflix.Notify.failure(message);
+                    }
+                } catch (error) {
+                    console.log(error);
+                    Notiflix.Notify.failure('Something went wrong.');
+                }
+
+                var template = document.getElementById('template-main-history').innerHTML;
+                var rendered = Mustache.render(template, { scanHistory });
+                document.getElementById('target-main-history').innerHTML = rendered;
+            }
+        }
+
+
+
+        render.header()
+
+    </script>
+
+
+
+</div>
