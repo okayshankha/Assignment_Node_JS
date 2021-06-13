@@ -3,6 +3,7 @@
 
 # Installation:
 - npm i
+- npm start
 
 
 # Project Understanding:
